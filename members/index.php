@@ -49,18 +49,7 @@ include("check.php");
 							</div>
 						</div>
 						<div class="col-md-6 col-xs-10 col-md-offset-1  col-lg-offset-1 col-lg-7 mobMenuCol">
-							<nav class="navbar">
-								<!-- Collect the nav links, forms, and other content for toggling -->
-                                <ul class="nav navbar-nav navbar-right menu">
-                                    <li class="current-menu-item"><a href="">Welcome, <?php echo $first_name; ?></a>
-									</li>
-                                    <li><a href="../service.html">services</a></li>
-                                    <li><a href="../pricing.html">pricing</a></li>
-                                    <li><a href="../contact.html">contact</a></li>
-									<li class="signup1"><a href="logout">logout</a></li>
-								</ul>
-								<!-- /.navbar-collapse -->
-							</nav>
+						<?php include('navheader.php');?>
 						</div>
 					</div>
 				</div>

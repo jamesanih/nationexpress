@@ -52,10 +52,10 @@ include("orders_info_check.php");
                                 <ul class="nav navbar-nav navbar-right menu">
                                     <li class="current-menu-item"><a href="">Welcome, <? echo $first_name; ?></a>
 									</li>
-                                    <li><a href="../service.html">services</a></li>
-									<li><a href="../track.html">track your parcel</a></li>
-                                    <li><a href="../pricing.html">pricing</a></li>
-                                    <li><a href="../contact.html">contact</a></li>
+                                    <li><a href="../service.php">services</a></li>
+									<li><a href="../track.php">track your parcel</a></li>
+                                    <li><a href="../pricing.php">pricing</a></li>
+                                    <li><a href="../contact.php">contact</a></li>
 									<li class="signup1"><a href="logout">logout</a></li>
 								</ul>
 								<!-- /.navbar-collapse -->

@@ -4,12 +4,8 @@
 		$sta =trim($_GET['status']);
 		$data  = htmlentities($sta);
 		$status = $data;	
-	}else  {?>
-		
-		<script>
-			window.location.href='index';
-		</script>
-	<?php 
+	}else  {
+		$status = "";
 	}
 
 	$account_id= $_SESSION['account_id'];
@@ -38,7 +34,7 @@
 	$email = $_SESSION['email'];
 	
 
-	switch ($status ) {
+	switch ($status) {
         case 'order_booked':
 		$mystatus = "Order Booked";
 		$estatus = "Order Booked";
@@ -69,6 +65,14 @@
 		$estatus = "Out for Delivery";
 		
 		break;	
+
+		default:
+		$mystatus = "All Orders";
+		$estatus = "All Orders";
+		break;
+
+
+
 	}
 	
 ?>

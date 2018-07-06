@@ -1,5 +1,6 @@
 <?php
 include("check.php");	
+include("orders_info_check.php");	
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,10 +13,10 @@ include("check.php");
 		<meta name="keywords" content="NationExpress24, Nation Express 24, Nation Express, NationExpress, NationalExpress, National Express NationalExpress24, Ship, Deliver, Quick Delivery, Fast Delivery, Same day, Next Day, Courier, Express Delivery, National Delivery, Nation Delivery, Nigeria Delivery, Lagos Delivery, Logistics, Ecommerce, Abuja, Ibadan, Port Harcourt, Maiduguri, DHL, UPS, ACE, Courier Service, Delivery Service, Pickup, Delivery, Pickup and Delivery, Fast Delivery, Express Pickup, Pick-up, Ikeja">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="shortcut icon" href="resources/img/nationexpress24.ico" />
-		<title>Admin Portal - NationExpress24 Delivery</title>
+		<title>Order Details for <?php echo $typereg; ?> - NationExpress24 Delivery</title>
 		
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-		<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+		<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 		<link href="resources/fonts/stylesheet.css" rel="stylesheet">
 		<link href="resources/css/reset.css" rel="stylesheet">
 		<link href="resources/css/slick.css" rel="stylesheet">
@@ -46,19 +47,7 @@ include("check.php");
 							</div>
 						</div>
 						<div class="col-md-6 col-xs-10 col-md-offset-1  col-lg-offset-1 col-lg-7 mobMenuCol">
-							<nav class="navbar">
-								<!-- Collect the nav links, forms, and other content for toggling -->
-                                <ul class="nav navbar-nav navbar-right menu">
-                                    <li class="current-menu-item"><a href="">Welcome, <? echo $first_name; ?></a>
-									</li>
-                                    <li><a href="../service.php">services</a></li>
-									<li><a href="../track.php">track your parcel</a></li>
-                                    <li><a href="../pricing.php">pricing</a></li>
-                                    <li><a href="../contact.php">contact</a></li>
-									<li class="signup1"><a href="logout">logout</a></li>
-								</ul>
-								<!-- /.navbar-collapse -->
-							</nav>
+                        <?php include_once('navheader.php');?>
 						</div>
 					</div>
 				</div>
@@ -74,8 +63,8 @@ include("check.php");
 						<div class="pricing-desc section-padding-two">
 							<div class="pricing-desc-title">
 								<div class="title">
-									<h2>Admin Portal</h2>
-									<p>Now, you can manage orders, users and set price.</p>
+									<h2>Order Details</h2>
+									<p>Tracking Number: <?php echo $typereg; ?></p>
 								</div>
 							</div>
 						</div>
@@ -86,52 +75,71 @@ include("check.php");
 					<div class="col-md-4 col-lg-4 col-sm-4 col-xs-12 text-center">
 						<div class="single-pricing-table">
 							<div class="pricing-title">
-								<h6>Orders</h6>
-								<h1><i class="fa fa-shopping-cart"></i></h1>
-								<h5>individual & merchant orders</h5>
+								<h6>Addresses</h6>
+								<h1><i class="fa fa-address-book-o"></i></h1>
+								<h5>pickup & delivery addresses</h5>
 							</div>
-							<ul class=price-list>
-								<a href="orders?status=order_booked"><li>Order Booked <span style="margin-left:10px;" class="badge"><? echo $orderbooked; ?></span></li></a>
-								<a href="orders?status=in_transit"><li>In-Transit <span style="margin-left:10px;" class="badge"><? echo $intransit; ?></span></li></a>
-								<a href="orders?status=delivered"><li>Delivered <span style="margin-left:10px;" class="badge"><? echo $delivered; ?></span></li></a>
-								<a href="orders?status=out_for_delivery"><li>Out for delivery <span style="margin-left:10px;" class="badge"><? echo $outfordelivery; ?></span></li></a>
-								<a href="orders?status=undelivered"><li>Undelivered <span style="margin-left:10px;" class="badge"><? echo $undelivered; ?></span></li></a>
-								<a href="orders?status=order_cancelled"><li>Order Cancelled <span style="margin-left:10px;" class="badge"><? echo $ordercancelled; ?></span></li></a>
+							<ul class="price-list">
+								<li><u><font color="red">PICKUP ADDRESS </font></u></li>
+								<li><span class="badge">CONTACT PERSON</span> <?php echo $p_contact_person; ?></li>
+								<li><span class="badge">ADDRESS</span> <?php echo $p_full_address; ?></li>
+								<li><span class="badge">PHONE NUMBER</span> <?php echo $p_phone; ?><?php echo $p_altphone; ?></li>
+								<li><span class="badge">SCHEDULED PICKUP DATE</span> <?php echo $p_scheduled_date; ?></li>
+							</ul>
+							<ul class="price-list">
+								<li><u><font color="red">DELIVERY ADDRESS </font></u></li>
+								<li><span class="badge">CONTACT PERSON</span> <?php echo $d_contact_person; ?></li>
+								<li><span class="badge">ADDRESS</span> <?php echo $d_full_address; ?></li>
+								<li><span class="badge">PHONE NUMBER</span> <?php echo $d_phone; ?><?php echo $d_altphone; ?></li>
+								<li><span class="badge">ESTIMATED DELIVERY DATE</span> <?php echo $d_est_delivery_date; ?></li>
+								<li><span class="badge">DELIVERY TYPE</span> <?php echo $d_delivery_type; ?></li>
 							</ul>
 						</div>
 					</div>
 					<div class="col-md-4 col-lg-4 col-sm-4 col-xs-12 text-center">
 						<div class="single-pricing-table">
 							<div class="pricing-title">
-								<h6>registered users</h6>
-								<h1><i class="fa fa-users"></i></h1>
-								<h5>list of customers</h5>
+								<h6>payment details</h6>
+								<h1><i class="fa fa-money"></i></h1>
+								<h5>delivery cost, payment method & pickup cost</h5>
 							</div>
-							<ul class=price-list>
-								<a href="customers?type=new"><li>New Customers <span style="margin-left:10px;" class="badge"><? echo $newcustomers; ?></span></li></a>
-								<a href="customers?type=returning"><li>Returning Customers <span style="margin-left:10px;" class="badge"><? echo $returningcustomers; ?></span></li></a>
-								<a href="invoices"><li>Manage Invoices <span style="margin-left:10px;" class="badge"><? echo $invoices; ?></span></li></a>
-								<a href="register"><li><span style="margin-right:10px;"><i class="fa fa-user"></i></span> Register User </li></a>
+							<ul class="price-list">
+								<li><span class="badge">DELIVERY COST</span> ₦<?php echo number_format($delivery_cost); ?></li>
+								<li><span class="badge">PICKUP COST</span> ₦<?php echo number_format($pickup_cost); ?></li>
+								<li><span class="badge">PAYMENT METHOD</span> <?php echo $payment_method; ?></li>
+								<li><span class="badge">PAYMENT STATUS</span> <?php echo $payment_status; ?></li>
+                                <?php if($payment_date){ ?>		
+                                    <li><span class="badge">PAYMENT DATE</span>
+                                    <?php echo $payment_date; ?></li>
+                                    <?php }?>
+								<li><span class="badge">INSURANCE FEE</span> <?php if($insurance_fee){ ?>₦<?php echo number_format($insurance_fee); ?><?php }?></li>
+								<li><span class="badge">TOTAL AMOUNT</span> ₦<?php echo number_format($total_cost); ?></li>
 							</ul>
-							<div class="order-buton">
-								<a href="create_invoice">Create Invoice</a>
-							</div>
+							<ul class="price-list">
+								<li><u><font color="red">USER DETAILS </font></u></li>
+								<li><span class="badge">FULL NAME</span> <?php echo $u_contact_person; ?></li>
+								<li><span class="badge">E-MAIL ADDRESS</span> <?php echo $u_email; ?></li>
+								<li><span class="badge">PHONE NUMBER</span> <?php echo $u_phone; ?><?php echo $u_altphone; ?></li>
+								<li><span class="badge">BUSINESS NAME</span> <?php echo $u_business_name; ?></li>
+							</ul>
 						</div>
 					</div>
 					<div class="col-md-4 col-lg-4 col-sm-4 col-xs-12 text-center">
 						<div class="single-pricing-table">
 							<div class="pricing-title">
-								<h6>settings</h6>
-								<h1><i class="fa fa-gears"></i></h1>
-								<h5>admin setup</h5>
+								<h6>parcel details</h6>
+								<h1><i class="fa fa-codepen"></i></h1>
+								<h5>package information</h5>
 							</div>
-							<ul class=price-list>
-								<a href="delivery_cities"><li>Manage Delivery Cities</li></a>
-								<a href="delivery_types"><li>Manage Delivery Types</li></a>
-								<a href="zones"><li>Manage Zone/Pricing</li></a>
+							<ul class="price-list">
+								<li><span class="badge">NO OF PARCEL</span> <?php echo $no_of_parcel; ?></li>
+								<li><span class="badge">WEIGHT IN KG</span> <?php echo $weight_kg; ?></li>
+								<li><span class="badge">DESCRIPTION</span> <?php echo $goods_description; ?></li>
+								<li><span class="badge">CASH TO COLLECT ON DELIVERY</span> <?php if($value_of_contents){ ?>₦<?php echo number_format($value_of_contents); ?><?php }?></li>
+								<li><span class="badge">ORDER STATUS</span> <?php echo $order_status; ?></li>
 							</ul>
 							<div class="order-buton">
-								<a href="change_password">Change Password</a>
+								<a href="track?booking_no=<?php echo $typereg; ?>" title="Tracking Number: <?php echo $typereg; ?>">Track this parcel</a>
 							</div>
 						</div>
 					</div>

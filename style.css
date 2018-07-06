@@ -281,7 +281,7 @@ nav.navbar {
 }
 
 .welcome_text:before {
-    background: #fffff none repeat scroll 0 0;
+    background: #ffffff none repeat scroll 0 0;
     content: "";
     height: 2px;
     left: 50%;
@@ -772,6 +772,8 @@ span.pricing-status {
     position: absolute;
     width: 75px;
 }
+
+
 
 .price {
     margin-bottom: 37px;
@@ -1309,7 +1311,10 @@ ul.breadcrumbs li {
     line-height: 50px;
     font-family: 'montserratbold';
     border-bottom: 1px solid #eee;
+    
 }
+
+
 
 .pricing-title h6 {
     font-size: 16px;

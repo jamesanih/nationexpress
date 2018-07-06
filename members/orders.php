@@ -52,19 +52,7 @@
 							</div>
 						</div>
 						<div class="col-md-6 col-xs-10 col-md-offset-1  col-lg-offset-1 col-lg-7 mobMenuCol">
-							<nav class="navbar">
-								<!-- Collect the nav links, forms, and other content for toggling -->
-                                <ul class="nav navbar-nav navbar-right menu">
-									<li class="current-menu-item"><a href="./" title="Go to My Portal" >Welcome, <?php echo $first_name; ?></a>
-									</li>
-                                    <li><a href="../service.html">services</a></li>
-									<li><a href="../track.html">track your parcel</a></li>
-                                    <li><a href="../pricing.html">pricing</a></li>
-                                    <li><a href="../contact.html">contact</a></li>
-									<li class="signup1"><a href="logout">logout</a></li>
-								</ul>
-								<!-- /.navbar-collapse -->
-							</nav>
+							<?php include_once('navheader.php');?>
 						</div>
 					</div>
 				</div>
@@ -95,8 +83,8 @@
 						<div class="panel-body">
 							<ul class="nav nav-tabs">
 								<li class="active"><a href="#recent" data-toggle="tab">
-								<?php if($status){ 
-								 echo $mystatus;  }?>
+								<?php  
+								 echo $mystatus;  ?>
 								 </a>
 								</li>
 								
@@ -166,7 +154,7 @@
 																<td><?php echo $b_booking_no; ?></td>
 																<td><?php echo $deli_fullname; ?></td>
 																<td><a href="javascript:void(0)" target="_blank"><button class="btn btn-default" title="Click here to update the order status" data-toggle="modal" data-target="#update_order" name="update">Update Status</button></a></td>
-																<td><a href="javascript:void(0)" target="_blank"><button class="btn btn-default" title="Click for more details" data-toggle="modal" data-target="#more_info" name="info">More info</button></a></td>
+																<td><a href="orders_info?booking_no=<?php echo $b_booking_no; ?>" target="_blank"><button class="btn btn-default" title="Click for more details">More info</button></a></td>
 																<td><a href="javascript:void(0)" target="_blank"><button class="btn btn-default" title="Click here to edit the order" data-toggle="modal" data-target="#edit" name="edit">Edit Order</button></a></td>
 															</tr>
 														<?php } 

@@ -1,4 +1,8 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
+
 <html lang="en">
 
 	<head>
@@ -46,14 +50,28 @@
 							<nav class="navbar">
 								<!-- Collect the nav links, forms, and other content for toggling -->
                                 <ul class="nav navbar-nav navbar-right menu">
-                                    <li><a href="index.html">home</a>
-									</li>
-                                    <li class="current-menu-item"><a href="service.html">services</a></li>
-									<li><a href="track.html">track your parcel</a></li>
-                                    <li><a href="pricing.html">pricing</a></li>
-                                    <li><a href="contact.html">contact</a></li>
-									<li class="signup1"><a href="login.html">login</a></li>
-									<li class="signup2"><a href="signup.html">sign up</a></li>
+								<?php
+										if (!empty($_SESSION['isAdmin']) && $_SESSION['isAdmin'] == "true") {?>
+											<li><a href="adminportal/">Welcome, <?php echo $_SESSION['first']; ?></a></li>
+										<?php }else if(!empty($_SESSION['isAdmin']) && $_SESSION['isAdmin'] == "false"){ ?>
+											<li><a href="members/">Welcome, <?php echo $_SESSION['first']; ?></a></li>
+										<?php }else if(empty($_SESSION['isAdmin'])){ ?>
+											<li><a href="index.html">home</a></li>
+											
+										<?php } ?>
+                                    <li class="current-menu-item"><a href="service.php">services</a></li>
+									<li><a href="track.php">track your parcel</a></li>
+                                    <li><a href="pricing.php">pricing</a></li>
+                                    <li><a href="contact.php">contact</a></li>
+									<?php
+										if (!empty($_SESSION['id'])) {?>
+											<li class="signup1"><a href="members/logout">logout</a></li>
+										<?php }else{ ?>
+											<li class="signup1"><a href="login.html">login</a></li>
+											<li class="signup2"><a href="signup.html">sign up</a></li>
+										<?php } ?>
+
+									
 								</ul>
 								<!-- /.navbar-collapse -->
 							</nav>
@@ -96,7 +114,7 @@
 								<li>24/7 Customer service</li>
 							</ul>
 							<div class="order-buton">
-								<a href="pricing.html">order now</a>
+								<a href="pricing.php">order now</a>
 							</div>
 						</div>
 					</div>
@@ -115,7 +133,7 @@
 								<li>Dedicated Account Manager</li>
 							</ul>
 							<div class="order-buton">
-								<a href="pricing.html">order now</a>
+								<a href="pricing.php">order now</a>
 							</div>
 						</div>
 					</div>
@@ -134,7 +152,7 @@
 								<li>24/7 Customer service</li>
 							</ul>
 							<div class="order-buton">
-								<a href="pricing.html">order now</a>
+								<a href="pricing.php">order now</a>
 							</div>
 						</div>
 					</div>

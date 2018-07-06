@@ -40,6 +40,7 @@
 			$_SESSION['email'] = $val_admin['email'];
 			$_SESSION['admin_id'] = $val_admin['admin_id'];
 			$_SESSION['user_ip'] = $ip;
+			$_SESSION['isAdmin'] = "true";
 
 
 			$query_login = mysqli_query($connect, "SELECT * FROM `admin_login_details` WHERE `admin_id`='{$val_admin['admin_id']}' AND `email`='{$val_admin['email']}' order by id DESC LIMIT 1");
@@ -80,6 +81,7 @@
 				$_SESSION['status']=$val['status'];
 				$_SESSION['email']=$val['email'];
 				$_SESSION['account_id']=$val['account_id'];
+				$_SESSION['isAdmin'] = "false";
 				$_SESSION['user_ip']=$ip;
 
 
