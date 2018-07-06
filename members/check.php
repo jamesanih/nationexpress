@@ -1,5 +1,8 @@
 <?php
 	session_start();
+	if (empty($_SESSION['email'])) {
+		header("Location: ../login.html");
+	}
 	header("Expires: Tue, 01 Jul 2001 06:00:00 GMT");
 	header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
 	header("Cache-Control: no-store, no-cache, must-revalidate");
@@ -11,10 +14,11 @@
 
 	
 	include("config.php");
-	protect();
+	//protect();
 	include('dbc.php');
 	require_once('../swift/lib/swift_required.php');
 	date_default_timezone_set('Africa/Lagos');
+	
 
 	$mypage = "dashboard";
 	
@@ -35,7 +39,7 @@
 	$first_name = $val_admin['first_name'];
 	$surname = $val_admin['sur_name'];
 	
-	echo $account_id;
+	
 	
 	
 	
@@ -44,35 +48,35 @@
 	$val_b_orders = mysqli_fetch_assoc($sql_b_orders);	
 	
 	//Count all Orders in "Delivered" status
-	$sqlbnot=mysqli_query($connect,"SELECT COUNT(booking_no) AS delivered FROM `tracking_details` WHERE `account_id`='$account_id' AND `status`='delivered' AND `old`=''");
+	$sqlbnot=mysqli_query($connect,"SELECT COUNT(booking_no) AS delivered FROM `tracking_details` WHERE `account_id`='$account_id' AND `tstatus`='delivered' AND `old`=''");
 	while($rowbnot=mysqli_fetch_object($sqlbnot)){ $delivered=$rowbnot->delivered; }
 	
-	//Count all Orders in "UnDelivered" status
-	$sqlundelivered=mysqli_query($connect,"SELECT COUNT(booking_no) AS undelivered FROM `tracking_details` WHERE `account_id`='$account_id' AND `status`='undelivered' AND `old`=''");
+	//Count all Orders in "UnDelivered" tstatus
+	$sqlundelivered=mysqli_query($connect,"SELECT COUNT(booking_no) AS undelivered FROM `tracking_details` WHERE `account_id`='$account_id' AND `tstatus`='undelivered' AND `old`=''");
 	while($rowundelivered=mysqli_fetch_object($sqlundelivered)){ $undelivered=$rowundelivered->undelivered; }
 	
-	//Count all Orders in "Order Booked" status
-	$sqlorderbooked=mysqli_query($connect,"SELECT COUNT(booking_no) AS orderbooked FROM `tracking_details` WHERE `account_id`='$account_id' AND `status`='order_booked' AND `old`=''");
+	//Count all Orders in "Order Booked" tstatus
+	$sqlorderbooked=mysqli_query($connect,"SELECT COUNT(booking_no) AS orderbooked FROM `tracking_details` WHERE `account_id`='$account_id' AND `tstatus`='order_booked' AND `old`=''");
 	while($roworderbooked=mysqli_fetch_object($sqlorderbooked)){ $orderbooked=$roworderbooked->orderbooked; }
 	
-	//Count all Orders in "In Transit" status
-	$sqlintransit=mysqli_query($connect,"SELECT COUNT(booking_no) AS intransit FROM `tracking_details` WHERE `account_id`='$account_id' AND `status`='in_transit' AND `old`=''");
+	//Count all Orders in "In Transit" tstatus
+	$sqlintransit=mysqli_query($connect,"SELECT COUNT(booking_no) AS intransit FROM `tracking_details` WHERE `account_id`='$account_id' AND `tstatus`='in_transit' AND `old`=''");
 	while($rowintransit=mysqli_fetch_object($sqlintransit)){ $intransit=$rowintransit->intransit; }
 	
-	//Count all Orders in "out for delivery" status
-	$sqloutfordelivery=mysqli_query($connect,"SELECT COUNT(booking_no) AS outfordelivery FROM `tracking_details` WHERE `account_id`='$account_id' AND `status`='out_for_delivery' AND `old`=''");
+	//Count all Orders in "out for delivery" tstatus
+	$sqloutfordelivery=mysqli_query($connect,"SELECT COUNT(booking_no) AS outfordelivery FROM `tracking_details` WHERE `account_id`='$account_id' AND `tstatus`='out_for_delivery' AND `old`=''");
 	while($rowoutfordelivery=mysqli_fetch_object($sqloutfordelivery)){ $outfordelivery=$rowoutfordelivery->outfordelivery; }
 	
-	//Count all Orders in "order cancelled" status
-	$sqlordercancelled=mysqli_query($connect,"SELECT COUNT(booking_no) AS ordercancelled FROM `tracking_details` WHERE `account_id`='$account_id' AND `status`='order_cancelled' AND `old`=''");
+	//Count all Orders in "order cancelled" tstatus
+	$sqlordercancelled=mysqli_query($connect,"SELECT COUNT(booking_no) AS ordercancelled FROM `tracking_details` WHERE `account_id`='$account_id' AND `tstatus`='order_cancelled' AND `old`=''");
 	while($rowordercancelled=mysqli_fetch_object($sqlordercancelled)){ $ordercancelled=$rowordercancelled->ordercancelled; }
 	
 	//Count Old customers
-	$sqlsnot=mysqli_query($connect,"SELECT COUNT(email) AS old FROM `register` WHERE `email` !='' AND `account_id`='$account_id' AND `status`='Enabled' AND `old`='yes'");
+	$sqlsnot=mysqli_query($connect,"SELECT COUNT(email) AS old FROM `register` WHERE `email` !='' AND `account_id`='$account_id' AND `tstatus`='Enabled' AND `old`='yes'");
 	while($rowsnot=mysqli_fetch_object($sqlsnot)){ $returningcustomers=$rowsnot->old; }
 	
 	//Count new customers
-	$sqlnew=mysqli_query($connect,"SELECT COUNT(email) AS newp FROM `register` WHERE `email` !='' AND `account_id`='$account_id' AND `status`='Enabled' AND `old`=''");
+	$sqlnew=mysqli_query($connect,"SELECT COUNT(email) AS newp FROM `register` WHERE `email` !='' AND `account_id`='$account_id' AND `tstatus`='Enabled' AND `old`=''");
 	while($rownew=mysqli_fetch_object($sqlnew)){ $newcustomers=$rownew->newp; }
 	
 	//Count invoices

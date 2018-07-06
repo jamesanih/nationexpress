@@ -1,25 +1,44 @@
 <?php
 	
-	foreach($_GET as $key => $value) {
-		$data[$key] = filter($value); // post variables are filtered
+	if($_GET['status'] =="order_booked" || $_GET['status'] =="in_transit" || $_GET['status'] =="delivered" || $_GET['status'] =="order_cancelled" ){
+		$sta =trim($_GET['status']);
+		$data  = htmlentities($sta);
+		$status = $data;	
+	}else  {?>
+		
+		<script>
+			window.location.href='index';
+		</script>
+	<?php 
 	}
-	$status = $data['status'];	
+
+	$account_id= $_SESSION['account_id'];
+	
+	// foreach($_GET as $key => $value) {
+	// 	$data[$key] = filter($value); // post variables are filtered
+	// }
+	
+	
+	
 	
 	if($status){
-	$sql_tr_orders = mysql_query("SELECT * FROM `tracking_details` WHERE `account_id`='$account_id' AND `status`='$status' AND `old`='' ORDER BY id DESC");
-	$row_tr_orders = mysql_num_rows($sql_tr_orders);
-	$val_tr_orders = mysql_fetch_assoc($sql_tr_orders);
+	$sql_tr_orders = mysqli_query($connect,"SELECT * FROM `tracking_details` WHERE `account_id`='$account_id' AND `tstatus`='$status' AND `old`='' ORDER BY id DESC");
+	$row_tr_orders = mysqli_num_rows($sql_tr_orders);
+	$val_tr_orders = mysqli_fetch_assoc($sql_tr_orders);
+	
+	
 	}
 	elseif(!$status){
-	$sql_tr_orders = mysql_query("SELECT * FROM `tracking_details` WHERE `account_id`='$account_id' AND `status`!='' AND `old`='' ORDER BY id DESC");
-	$row_tr_orders = mysql_num_rows($sql_tr_orders);
-	$val_tr_orders = mysql_fetch_assoc($sql_tr_orders);
+	$sql_tr_orders = mysqli_query($connect,"SELECT * FROM `tracking_details` WHERE `account_id`='$account_id' AND `tstatus`!='' AND `old`='' ORDER BY id DESC");
+	$row_tr_orders = mysqli_num_rows($sql_tr_orders);
+	$val_tr_orders = mysqli_fetch_assoc($sql_tr_orders);
 	}
 	$myaccount_id = $val_tr_orders['account_id'];
-	$b_status = $val_tr_orders['status'];
+	$b_status = $val_tr_orders['tstatus'];
 	$email = $_SESSION['email'];
+	
 
-	switch ($status || $b_status) {
+	switch ($status ) {
         case 'order_booked':
 		$mystatus = "Order Booked";
 		$estatus = "Order Booked";

@@ -49,6 +49,7 @@
 	$_SESSION['timeout'] = time();
 
 	function protect(){
+		$connect = mysqli_connect("localhost","root","","nationex_smartzip");
 		if($_SESSION['id']==""){
 			unset($_SESSION);
 			unset($_COOKIE);

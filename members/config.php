@@ -15,8 +15,8 @@
 	$time = date("h:i A");
 	$ip = getenv("REMOTE_ADDR");
 	$user_agent = $_SERVER['HTTP_USER_AGENT'];
-	//$J7 = simplexml_load_file("http://www.geoplugin.net/xml.gp?ip=$ip");
-	//$ip_country = $J7->geoplugin_countryName ; // Country
+	$J7 = simplexml_load_file("http://www.geoplugin.net/xml.gp?ip=$ip");
+	$ip_country = $J7->geoplugin_countryName ; // Country
 
 	$ch = curl_init();
 
